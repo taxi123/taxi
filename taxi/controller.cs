@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 namespace taxi
 {
     /// <summary>  
-    /// The main controller, manages IO actions\n
-    /// every Input action must be performed via this controller
+    /// <para>manages IO actions</para>
+    /// <para>every Input action must be performed via this controller</para>
     /// </summary>
     class Controller
     {
+
         public Controller(){
+            
+        }
+        public void createNewSimulation()
+        {
 
         }
     }
