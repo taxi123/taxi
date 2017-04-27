@@ -23,5 +23,9 @@ namespace taxi
         {
             
         }
+        public void startSimulation()
+        {
+
+        }
     }
 }
