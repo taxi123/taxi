@@ -23,6 +23,7 @@ namespace taxi
         {
             
         }
+        public void abc() { return; }
         public void startSimulation()
         {
 
