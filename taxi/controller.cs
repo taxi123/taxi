@@ -16,9 +16,12 @@ namespace taxi
         public Controller(){
             
         }
+        /// <summary>
+        ///     creates a new simulation and asks if the current one should be discarded
+        /// </summary>
         public void createNewSimulation()
         {
-
+            
         }
     }
 }
