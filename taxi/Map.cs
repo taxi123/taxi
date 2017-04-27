@@ -8,5 +8,6 @@ namespace taxi
 {
     class Map
     {
+        private int abc;
     }
 }
