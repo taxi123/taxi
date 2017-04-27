@@ -20,9 +20,19 @@ namespace taxi
     /// </summary>
     public partial class MainWindow : Window
     {
+        Controller controller = new Controller();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void click_close(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void click_new(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
