@@ -17,7 +17,7 @@ namespace taxi
             this.listPoints = listPoints;
             foreach(Point p in this.listPoints)
             {
-
+                 //
             }
         }
     }
