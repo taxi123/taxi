@@ -8,5 +8,9 @@ namespace taxi
 {
     class Map
     {
+        private List<Point> crossings;
+        private List<Point> streets;
+        private double xachsis;
+        private double yachsis;
     }
 }
