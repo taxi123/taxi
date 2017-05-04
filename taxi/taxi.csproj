@@ -55,10 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-	<Compile Include="Client.cs" />
+    <Compile Include="Central.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="State.cs" />
     <Compile Include="Street.cs" />
+    <Compile Include="Taxi.cs" />
+    <Compile Include="TaxiPoint.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

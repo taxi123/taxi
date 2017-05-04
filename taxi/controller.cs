@@ -21,7 +21,9 @@ namespace taxi
         /// </summary>
         public void createNewSimulation()
         {
-            
+         // Parameter wurden eingegeben
+        // Ticks/Sekunden wo Kunden erscheinen
+        // Movement per Tick/Sekunde (oder so ähnlich)   
         }
         public void startSimulation()
         {
