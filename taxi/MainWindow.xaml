@@ -37,7 +37,7 @@
         <Label x:Name="label" Content="Simulationseigenschaften" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
         <Canvas x:Name="mapCanvas" HorizontalAlignment="Left" Height="500" Margin="270,26,0,-368" VerticalAlignment="Top" Width="500">
             <Canvas.Background>
-                <DrawingBrush TileMode="Tile" Viewport="-25,-25,100,100" ViewportUnits="Absolute">
+                <DrawingBrush TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute">
                     <DrawingBrush.Drawing>
                         <GeometryDrawing>
                             <GeometryDrawing.Geometry>
@@ -51,5 +51,6 @@
                 </DrawingBrush>
             </Canvas.Background>
         </Canvas>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="95,295,0,-135" VerticalAlignment="Top" Width="75" Click="button_Click"/>
     </Grid>
 </Window>

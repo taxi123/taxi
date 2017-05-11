@@ -35,5 +35,16 @@ namespace taxi
         {
             controller.createNewSimulation();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Point point in Point)
+            {
+                var ellipse = new Ellipse() { Width = 1.5, Height = 1.5, Stroke = new SolidColorBrush(Colors.IndianRed) };
+                Canvas.SetLeft(ellipse, point.getX);
+                Canvas.SetTop(ellipse, point.getY);
+                mapCanvas.Children.Add(ellipse);
+            }
+        }
     }
 }
