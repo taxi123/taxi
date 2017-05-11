@@ -39,5 +39,15 @@ namespace taxi
         {
             this.taxiPoints.Add(taxiPoint);
         }
+
+        /// <summary>
+        /// Constructor - Init with GUI Parameters
+        /// - Anzahl Taxis
+        /// - Anzahl Taxistände
+        /// - Anzahl Kunden
+        /// </summary>
+        public Central(int taxis, int taxispoint, int client)
+        {
+        }
     }
 }
