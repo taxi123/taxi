@@ -30,6 +30,7 @@ namespace taxi
         {
             Application.Current.Shutdown();
         }
+
         private void click_new(object sender, RoutedEventArgs e)
         {
             controller.createNewSimulation();
