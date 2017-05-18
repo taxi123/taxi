@@ -12,16 +12,28 @@ namespace taxi
     /// </summary>
     class Controller
     {
-
-        public Controller(){
-            
-        }
+        Map map;
+        bool changed = false;
+        public Controller(){}
         /// <summary>
         ///     creates a new simulation and asks if the current one should be discarded
         /// </summary>
-        public void createNewSimulation()
+        public void createNewSimulation(System.Windows.Controls.Canvas mapCanvas)
         {
+            string messageBoxText = "Sie haben ungespeicherte Änderungen. Wollen Sie wirklich eine neue Simulation starten?";
+            string caption = "SupaDoopaTaxiPoopa";
+            System.Windows.MessageBoxButton button = System.Windows.MessageBoxButton.YesNoCancel;
+            System.Windows.MessageBoxImage icon = System.Windows.MessageBoxImage.Warning;
+
+            if (!changed || changed && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
+            {
+                map = new Map(this, mapCanvas);
+            }
             
+        }
+        public getTextField(string identifier)
+        {
+            System.Windows.Controls.TextBlock;
         }
         public void startSimulation()
         {
