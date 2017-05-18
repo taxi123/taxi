@@ -85,6 +85,24 @@ namespace taxi
                 Thread.Sleep(100);
             }
 
+            for (int i = 0; i < 20; i++)
+            {
+                var ellipse = new Ellipse()
+                {
+                    Width = 5,
+                    Height = 5,
+                    Stroke = Brushes.White,
+                    Fill = Brushes.LawnGreen
+                };
+                Task.Delay(rndm.Next(0, 5) * 1000);
+                Canvas.SetLeft(ellipse, rndm.Next(1, 4) * 100 - 2.5);
+                Canvas.SetTop(ellipse, rndm.Next(1, 4) * 100 - 2.5);
+                mapCanvas.Children.Add(ellipse);
+
+                Thread.Sleep(100);
+
+            }
+
             MessageBox.Show("Punkte erfolgreich eingezeichnet!");
         }
 

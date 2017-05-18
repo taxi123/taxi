@@ -28,8 +28,6 @@
             </MenuItem>
             <MenuItem Header="Hilfe"/>
         </Menu>
-        <Label x:Name="taxiCountLabel" Content="Taxianzahl" HorizontalAlignment="Left" Margin="10,67,0,-36" VerticalAlignment="Top"/>
-        <TextBox x:Name="taxiCountInput" HorizontalAlignment="Left" Height="23" Margin="10,93,0,-55" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="taxiStandLabel" Content="Anzahl Taxistände" HorizontalAlignment="Left" Margin="10,121,0,-54" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
         <TextBox x:Name="TaxiStandInput" HorizontalAlignment="Left" Height="23" Margin="10,147,0,-78" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TaxiStandInput_TextChanged"/>
         <Label x:Name="conurbationCountLabel" Content="Anzahl Ballungszentren" HorizontalAlignment="Left" Margin="10,175,0,-79" VerticalAlignment="Top"/>
