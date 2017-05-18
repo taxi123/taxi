@@ -22,7 +22,6 @@ namespace taxi
     public partial class MainWindow : Window
     {
         Controller controller = new Controller();
-
         Random rndm;
 
         public MainWindow()

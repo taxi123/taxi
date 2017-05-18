@@ -21,13 +21,17 @@ namespace taxi
         /// </summary>
         public void createNewSimulation()
         {
-         // Parameter wurden eingegeben
-        // Ticks/Sekunden wo Kunden erscheinen
-        // Movement per Tick/Sekunde (oder so ähnlich)   
+            
         }
         public void startSimulation()
         {
-
+            System.Timers.Timer ticker = new System.Timers.Timer();
+            ticker.Elapsed += new System.Timers.ElapsedEventHandler(tickEvent);
+            ticker.Interval = 100;
+            ticker.Enabled = true;
+        }
+        private void tickEvent(object source, System.Timers.ElapsedEventArgs e) {
+            
         }
     }
 }

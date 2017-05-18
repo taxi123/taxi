@@ -14,7 +14,6 @@ namespace taxi
         private List<Point> streets;
         private double xachsis;
         private double yachsis;
-
-
     }
+
 }
