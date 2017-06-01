@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace taxi
 {
-    class Taxi
+    class Taxi : IMoveable
     {
         private Client client;
         private State state;
         private Point currentPosition;
+
+        public Taxi (State state, Point currentPosition)
+        {
+            this.state = state;
+            this.currentPosition = currentPosition;
+        }
 
         /// <summary>
         /// Client(s) enter(s) the taxi. Client(s) will give information about his(their) destination
@@ -19,6 +25,11 @@ namespace taxi
         public void enterTaxi(Client client)
         {
             this.client = client;
+        }
+
+        public void move(Point p1, Point p2)
+        {
+            
         }
     }
 }

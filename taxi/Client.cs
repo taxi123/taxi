@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace taxi
 {
-    class Client
+    class Client : IMoveable
     {
         private Point start;
         private Point destination;
@@ -29,6 +29,11 @@ namespace taxi
         public Point getDestination()
         {
             return this.destination;
+        }
+
+        public void move(Point p1, Point p2)
+        {
+          
         }
     }
 }
