@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,7 +41,7 @@ namespace taxi
 
         private void generateStands_Click(object sender, RoutedEventArgs e)
         {
-            controller.createNewSimulation(mapCanvas,moveableCanvas);
+            controller.createNewSimulation();
         }
 
         private void TaxiStandInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -67,6 +67,19 @@ namespace taxi
             {
                 generateStands.IsEnabled = false;
             }
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            controller.continueSimulation();
+        }
+        private void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            controller.pauseSimulation();
+        }
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            controller.clearSimulation();
         }
     }
 }
