@@ -8,6 +8,10 @@ using System.Windows.Media;
 
 namespace taxi
 {
+    /// <summary>
+    /// <para>generates points,taxipoints and draws them on the map</para>
+    /// <para>also draws moveable objects like taxis and clients</para>
+    /// </summary>
     class Map
     {
         private List<Point> crossings;
@@ -19,12 +23,15 @@ namespace taxi
 
         private System.Windows.Controls.Canvas map;
         private System.Windows.Controls.Canvas move;
+        private MainWindow window;
 
-        public Map(MainWindow window, System.Windows.Controls.Canvas mapCanvas, System.Windows.Controls.Canvas moveableCanvas)
+        public Map(MainWindow win)
         {
             rndm = new Random();
-            this.map = mapCanvas;
-            this.move = moveableCanvas;
+            this.window = win;
+            this.map = window.mapCanvas;
+            this.move = window.moveableCanvas;
+            
             clear(true);
             createValidPoints();
 
@@ -44,7 +51,11 @@ namespace taxi
                     Fill = Brushes.DeepSkyBlue
                 };
 
-                //points.ElementAt(rndm.Next(0,points.Count));
+                Point tmp = null;
+                while (tmp == null || usedPoints.Contains(tmp))
+                {
+                    tmp = points.ElementAt(rndm.Next(0, points.Count));
+                }
                 System.Windows.Controls.Canvas.SetLeft(rectangle, rndm.Next(0, 5) * 100 + 20);
                 System.Windows.Controls.Canvas.SetTop(rectangle, rndm.Next(0, 5) * 100 - 10);
                 map.Children.Add(rectangle);
