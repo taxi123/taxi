@@ -24,12 +24,6 @@ namespace taxi
             Point point = client.getStart();
             int shortestDistance = 0;
             TaxiPoint taxiPoint = null;
-            foreach(TaxiPoint taxiPoint in taxiPoints)
-            {
-                Point tpPoint = taxiPoint.getPosition();
-                int distance = 0;
-                taxiPoint.hasCapacity();
-            }
 
             return new TaxiPoint(point, 1);
         }

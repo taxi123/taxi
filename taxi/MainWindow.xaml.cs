@@ -26,6 +26,7 @@ namespace taxi
         public MainWindow()
         {
             controller = new Controller(this);
+
         }
         public System.Windows.Media.ImageSource CanvasBG { get; set; }
         private void click_close(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace taxi
 
         private void generateStands_Click(object sender, RoutedEventArgs e)
         {
-            controller.createNewSimulation(mapCanvas);
+            controller.createNewSimulation(mapCanvas,moveableCanvas);
         }
 
         private void TaxiStandInput_TextChanged(object sender, TextChangedEventArgs e)

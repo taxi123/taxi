@@ -23,7 +23,7 @@ namespace taxi
         /// <summary>
         ///     creates a new simulation and asks if the current one should be discarded
         /// </summary>
-        public void createNewSimulation(System.Windows.Controls.Canvas mapCanvas)
+        public void createNewSimulation(System.Windows.Controls.Canvas mapCanvas, System.Windows.Controls.Canvas moveableCanvas)
         {
             string messageBoxText = "Es läuft derzeit eine Simulation. Wollen Sie wirklich eine neue Simulation starten?";
             string caption = "SupaDoopaTaxiPoopa";
@@ -32,7 +32,7 @@ namespace taxi
 
             if (!running || running && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
             {
-                map = new Map(window, mapCanvas);
+                map = new Map(window, mapCanvas,moveableCanvas);
                 startSimulation();
                 running = true;
                 window.generateStands.IsEnabled = false;
@@ -41,7 +41,7 @@ namespace taxi
         }
         public void clearSimulation()
         {
-            string messageBoxText = "Es läuft derzeit eine Simulation. Wollen Sie wirklich eine neue Simulation starten?";
+            string messageBoxText = "Wollen Sie die Simulation abbrechen?";
             string caption = "SupaDoopaTaxiPoopa";
             System.Windows.MessageBoxButton button = System.Windows.MessageBoxButton.YesNoCancel;
             System.Windows.MessageBoxImage icon = System.Windows.MessageBoxImage.Warning;
