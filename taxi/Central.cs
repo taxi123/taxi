@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace taxi
@@ -13,17 +14,20 @@ namespace taxi
     {
         private List<Taxi> taxis;
         private List<TaxiPoint> taxiPoints;
+        private List<Point> conurbationPoints;
+        private List<Client> clients;
         private int deniedRequests;
         private Map map;
         private MainWindow window;
-
-        System.Timers.Timer ticker;
+        private int tick = 0;
+        private int maxTicks = 200;
+        CancellationTokenSource token;
         public bool running = false;
 
         public Central(MainWindow window)
         {
             this.window = window;
-            this.map = map = new Map(window); ;
+            this.map = map = new Map(window,this); ;
         }
         public bool isRunning()
         {
@@ -44,7 +48,7 @@ namespace taxi
             return new TaxiPoint(point, 1);
         }
 
-        public void createClient()
+        public void createClients()
         {
 
         }
@@ -58,21 +62,42 @@ namespace taxi
         {
             this.taxiPoints.Add(taxiPoint);
         }
+        public void addConnurbationPoint(Point p)
+        {
+            conurbationPoints.Add(p);
+        }
+        public List<Point> getConurbationPoints()
+        {
+            return conurbationPoints;
+        }
+        public List<Client> getClients()
+        {
+            return clients;
+        }
+        public List<Taxi> getTaxis()
+        {
+            return taxis;
+        }
         public void clearMap(bool complete)
         {
             map.clear(complete);
         }
         public void startSimulation()
         {
-            ticker = new System.Timers.Timer();
-            ticker.Elapsed += new System.Timers.ElapsedEventHandler(tickEvent);
-            ticker.Interval = 1000;
-            ticker.Start();
-        }
-        private void tickEvent(object source, System.Timers.ElapsedEventArgs e)
-        {
-
-            map.redraw();
+            running = true;
+            token = new CancellationTokenSource();
+            CancellationToken tok = token.Token;
+            Task.Run(() =>
+            {
+                while (!tok.IsCancellationRequested || tick < maxTicks)
+                {
+                    window.Dispatcher.Invoke((Action)(() => {
+                        map.redraw();
+                    }));
+                    System.Threading.Thread.Sleep(200);
+                    tick++;
+                }
+            },tok);
         }
 
         public void clearSimulation()
@@ -82,10 +107,10 @@ namespace taxi
             System.Windows.MessageBoxButton button = System.Windows.MessageBoxButton.YesNoCancel;
             System.Windows.MessageBoxImage icon = System.Windows.MessageBoxImage.Warning;
 
-            if (!central.isRunning() || central.isRunning() && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
+            if (!isRunning() || isRunning() && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
             {
-                central.clearMap(true);
-                ticker.Stop();
+                map.clear(true);
+                token.Cancel();
                 running = false;
                 if (window.TaxiStandInput.Text.Length > 0 && window.conurbationCountInput.Text.Length > 0)
                 {
