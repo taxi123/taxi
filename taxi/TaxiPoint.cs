@@ -21,12 +21,20 @@ namespace taxi
 
         public void addTaxi(Taxi taxi)
         {
-            if (hasCapacity()) this.taxis.Add(taxi);
+            if (hasCapacity()) {
+                this.taxis.Add(taxi);
+                this.currentCapacity++;
+           }
         }
 
+        public Point getPosition()
+        {
+            return this.point;
+        }
         public void dropTaxis(Taxi taxi)
         {
             this.taxis.Remove(taxi);
+            this.currentCapacity--;
         }
 
         public Boolean hasCapacity()
