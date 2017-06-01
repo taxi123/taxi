@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,8 +34,29 @@ namespace taxi
                 central = new Central(window);
                 central.startSimulation();
                 window.generateStands.IsEnabled = false;
+                window.Pause.IsEnabled = true;
+                window.Stop.IsEnabled = true;
             }
 
+        }
+        public void clearSimulation()
+        {
+            window.Start.IsEnabled = true;
+            window.Pause.IsEnabled = false;
+            window.Stop.IsEnabled = false;
+            central.clearSimulation();
+        }
+        public void pauseSimulation()
+        {
+            window.Start.IsEnabled = true;
+            window.Pause.IsEnabled = false;
+            window.Stop.IsEnabled = true;
+        }
+        public void continueSimulation()
+        {
+            window.Start.IsEnabled = false;
+            window.Pause.IsEnabled = true;
+            window.Stop.IsEnabled = true;
         }
     }
 }
