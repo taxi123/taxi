@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +25,10 @@ namespace taxi
         public void enterTaxi(Client client)
         {
             this.client = client;
+        }
+        public Point getPosition()
+        {
+            return currentPosition;
         }
 
         public void move(Point p1, Point p2)
