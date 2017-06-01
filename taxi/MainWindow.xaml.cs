@@ -21,17 +21,13 @@ namespace taxi
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controller controller = new Controller();
-        Random rndm;
+        Controller controller;
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            rndm = new Random();
-            generateStands.IsEnabled = false;
+            controller = new Controller(this);
         }
-
+        public System.Windows.Media.ImageSource CanvasBG { get; set; }
         private void click_close(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -39,7 +35,7 @@ namespace taxi
 
         private void click_new(object sender, RoutedEventArgs e)
         {
-            controller.createNewSimulation(mapCanvas);
+            controller.clearSimulation();
         }
 
         private void generateStands_Click(object sender, RoutedEventArgs e)
@@ -52,10 +48,12 @@ namespace taxi
             if (TaxiStandInput.Text.Length > 0 && conurbationCountInput.Text.Length > 0)
             {
                 generateStands.IsEnabled = true;
-            } else
+            }
+            else
             {
                 generateStands.IsEnabled = false;
             }
+
         }
 
         private void conurbationCountInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -63,7 +61,8 @@ namespace taxi
             if (TaxiStandInput.Text.Length > 0 && conurbationCountInput.Text.Length > 0)
             {
                 generateStands.IsEnabled = true;
-            } else
+            }
+            else
             {
                 generateStands.IsEnabled = false;
             }

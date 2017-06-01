@@ -28,27 +28,16 @@
             </MenuItem>
             <MenuItem Header="Hilfe"/>
         </Menu>
+        <Label x:Name="heading" Content="Simulationseigenschaften" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
         <Label x:Name="taxiStandLabel" Content="Anzahl Taxistände" HorizontalAlignment="Left" Margin="10,121,0,-54" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
         <TextBox x:Name="TaxiStandInput" HorizontalAlignment="Left" Height="23" Margin="10,147,0,-78" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TaxiStandInput_TextChanged"/>
         <Label x:Name="conurbationCountLabel" Content="Anzahl Ballungszentren" HorizontalAlignment="Left" Margin="10,175,0,-79" VerticalAlignment="Top"/>
         <TextBox x:Name="conurbationCountInput" HorizontalAlignment="Left" Height="23" Margin="10,201,0,-100" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="conurbationCountInput_TextChanged"/>
-        <Label x:Name="label" Content="Simulationseigenschaften" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="generateStands" Content="Generieren" HorizontalAlignment="Left" Margin="10,257,0,-109" VerticalAlignment="Top" Width="75" Click="generateStands_Click" IsEnabled="False"/>
         <Canvas x:Name="mapCanvas" HorizontalAlignment="Left" Height="500" Margin="270,26,0,-368" VerticalAlignment="Top" Width="500">
             <Canvas.Background>
-                <DrawingBrush TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute">
-                    <DrawingBrush.Drawing>
-                        <GeometryDrawing>
-                            <GeometryDrawing.Geometry>
-                                <RectangleGeometry Rect="0,0,100,100"/>
-                            </GeometryDrawing.Geometry>
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="Gray" Thickness="4"/>
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
+                <ImageBrush ImageSource="/resources/map.png"/>
             </Canvas.Background>
         </Canvas>
-        <Button x:Name="generateStands" Content="Generieren" HorizontalAlignment="Left" Margin="10,257,0,-109" VerticalAlignment="Top" Width="75" Click="generateStands_Click"/>
     </Grid>
 </Window>

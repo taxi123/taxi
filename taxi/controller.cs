@@ -12,38 +12,61 @@ namespace taxi
     /// </summary>
     class Controller
     {
+        MainWindow window;
         Map map;
-        bool changed = false;
-        public Controller(){}
+        System.Timers.Timer ticker;
+        public bool running = false;
+        public Controller(MainWindow window)
+        {
+            this.window = window;
+        }
         /// <summary>
         ///     creates a new simulation and asks if the current one should be discarded
         /// </summary>
         public void createNewSimulation(System.Windows.Controls.Canvas mapCanvas)
         {
-            string messageBoxText = "Sie haben ungespeicherte Änderungen. Wollen Sie wirklich eine neue Simulation starten?";
+            string messageBoxText = "Es läuft derzeit eine Simulation. Wollen Sie wirklich eine neue Simulation starten?";
             string caption = "SupaDoopaTaxiPoopa";
             System.Windows.MessageBoxButton button = System.Windows.MessageBoxButton.YesNoCancel;
             System.Windows.MessageBoxImage icon = System.Windows.MessageBoxImage.Warning;
 
-            if (!changed || changed && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
+            if (!running || running && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
             {
-                map = new Map(this, mapCanvas);
+                map = new Map(window, mapCanvas);
+                startSimulation();
+                running = true;
+                window.generateStands.IsEnabled = false;
             }
-            
+
         }
-        public getTextField(string identifier)
+        public void clearSimulation()
         {
-            System.Windows.Controls.TextBlock;
+            string messageBoxText = "Es läuft derzeit eine Simulation. Wollen Sie wirklich eine neue Simulation starten?";
+            string caption = "SupaDoopaTaxiPoopa";
+            System.Windows.MessageBoxButton button = System.Windows.MessageBoxButton.YesNoCancel;
+            System.Windows.MessageBoxImage icon = System.Windows.MessageBoxImage.Warning;
+
+            if (!running || running && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
+            {
+                map.clear();
+                ticker.Stop();
+                running = false;
+                if (window.TaxiStandInput.Text.Length > 0 && window.conurbationCountInput.Text.Length > 0)
+                {
+                    window.generateStands.IsEnabled = false;
+                }
+            }
         }
         public void startSimulation()
         {
-            System.Timers.Timer ticker = new System.Timers.Timer();
+            ticker = new System.Timers.Timer();
             ticker.Elapsed += new System.Timers.ElapsedEventHandler(tickEvent);
-            ticker.Interval = 100;
-            ticker.Enabled = true;
+            ticker.Interval = 1000;
+            ticker.Start();
         }
-        private void tickEvent(object source, System.Timers.ElapsedEventArgs e) {
-            
+        private void tickEvent(object source, System.Timers.ElapsedEventArgs e)
+        {
+
         }
     }
 }
