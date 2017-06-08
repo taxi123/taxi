@@ -32,7 +32,7 @@ namespace taxi
             this.conurbationPoints = new List<Point>();
             this.clients = new List<Client>();
             deniedRequests = 0;
-            this.map = map = new Map(window,this); ;
+            this.map = map = new Map(window,this);
         }
         public bool isRunning()
         {
@@ -65,7 +65,11 @@ namespace taxi
 
         public void addTaxiPoint(TaxiPoint taxiPoint)
         {
-            this.taxiPoints.Add(taxiPoint);
+            taxiPoints.Add(taxiPoint);
+        }
+        public List<TaxiPoint> getTaxiPoints()
+        {
+            return taxiPoints;
         }
         public void addConnurbationPoint(Point p)
         {
@@ -96,9 +100,16 @@ namespace taxi
             {
                 while (!tok.IsCancellationRequested || tick < maxTicks)
                 {
-                    window.Dispatcher.Invoke((Action)(() => {
-                        map.redraw();
-                    }));
+                    try
+                    {
+                        window.Dispatcher.Invoke((Action)(() => {
+                            map.redraw();
+                        }));
+                    }
+                    catch (TaskCanceledException e)
+                    {
+                        token.Cancel();
+                    }
                     System.Threading.Thread.Sleep(200);
                     tick++;
                 }

@@ -103,31 +103,20 @@ namespace taxi
                 }
                 
             }
-            int taxiInt = taxiStandInt * 3;
-            for(int i = 0; i < taxiInt; i++)
+            foreach(TaxiPoint tp in central.getTaxiPoints())
             {
-                var rectangle = new System.Windows.Shapes.Rectangle()
+                for (int i = 0; i < tp.getCapacity(); i++)
                 {
-                    Width = 10,
-                    Height = 10,
-                    Fill = Brushes.Yellow
-                };
-                Point tmp = null;
-                while (tmp == null || usedPoints.Contains(tmp))
-                {
-                    tmp = points.ElementAt(rndm.Next(0, points.Count));
-                    if (usedPoints.Count == points.Count)
+                    var rectangle = new System.Windows.Shapes.Rectangle()
                     {
-                        break;
-                    }
-                }
-                if (tmp != null)
-                {
-                    //TODO: statische Kapazität erweitern auf Input-Feld
-                    Taxi taxi = new Taxi(new State(10, "Frei"), tmp);
+                        Width = 10,
+                        Height = 10,
+                        Fill = Brushes.Yellow
+                    };
+                    Taxi taxi = new Taxi(new State(10, "Frei"), tp.getPosition());
                     central.addTaxi(taxi);
-                    System.Windows.Controls.Canvas.SetLeft(rectangle, tmp.getX());
-                    System.Windows.Controls.Canvas.SetTop(rectangle, tmp.getY());
+                    System.Windows.Controls.Canvas.SetLeft(rectangle, tp.getPosition().getX());
+                    System.Windows.Controls.Canvas.SetTop(rectangle, tp.getPosition().getY());
                     map.Children.Add(rectangle);
                 }
             }
@@ -174,8 +163,36 @@ namespace taxi
         public void redraw()
         {
             clear();
-            List<Point> conurbationPoints = central.getConurbationPoints();
 
+            List<TaxiPoint> taxiPoints = central.getTaxiPoints();
+            foreach (TaxiPoint tp in taxiPoints)
+            {
+                var rectangle = new System.Windows.Shapes.Rectangle()
+                {
+                    Width = 10,
+                    Height = 15,
+                    Stroke = Brushes.Black,
+                    Fill = Brushes.Aqua
+                };
+                System.Windows.Controls.Canvas.SetLeft(rectangle, tp.getPosition().getX());
+                System.Windows.Controls.Canvas.SetTop(rectangle, tp.getPosition().getY());
+                map.Children.Add(rectangle);
+            }
+
+            List<Point> conurbationPoints = central.getConurbationPoints();
+            foreach (Point p in conurbationPoints)
+            {
+                var ellipse = new System.Windows.Shapes.Ellipse()
+                {
+                    Width = 20,
+                    Height = 20,
+                    Stroke = Brushes.Black,
+                    Fill = Brushes.OrangeRed
+                };
+                System.Windows.Controls.Canvas.SetLeft(ellipse, p.getX());
+                System.Windows.Controls.Canvas.SetTop(ellipse, p.getY());
+                map.Children.Add(ellipse);
+            }
 
             List<Client> clients = central.getClients();
             foreach (Client c in clients)
