@@ -22,7 +22,6 @@ namespace taxi
         Random rndm;
 
         private System.Windows.Controls.Canvas map;
-        private System.Windows.Controls.Canvas move;
         private MainWindow window;
         private Central central;
 
@@ -32,9 +31,8 @@ namespace taxi
             this.window = win;
             this.central = central;
             this.map = window.mapCanvas;
-            this.move = window.moveableCanvas;
             
-            clear(true);
+            clear();
             createValidPoints();
 
             int taxiStandInt;
@@ -101,7 +99,7 @@ namespace taxi
                     central.addConnurbationPoint(tmp);
                     System.Windows.Controls.Canvas.SetLeft(ellipse, tmp.getX());
                     System.Windows.Controls.Canvas.SetTop(ellipse, tmp.getY());
-                    move.Children.Add(ellipse);
+                    map.Children.Add(ellipse);
                 }
                 
             }
@@ -142,15 +140,15 @@ namespace taxi
             return this.points;
         }
 
-        public void clear(bool complete)
+        public void clear()
         {
-            move.Children.Clear();
-            if (complete) map.Children.Clear();
-
+            map.Children.Clear();
         }
         public void redraw()
         {
-            clear(false);
+            clear();
+            List<Point> conurbationPoints = central.getConurbationPoints();
+
 
             List<Client> clients = central.getClients();
             foreach (Client c in clients)
@@ -164,8 +162,9 @@ namespace taxi
                 };
                 System.Windows.Controls.Canvas.SetLeft(ellipse, c.getPosition().getX());
                 System.Windows.Controls.Canvas.SetTop(ellipse, c.getPosition().getY());
-                move.Children.Add(ellipse);
+                map.Children.Add(ellipse);
             }
+
             List<Taxi> taxis = central.getTaxis();
             foreach (Taxi t in taxis)
             {
@@ -178,7 +177,7 @@ namespace taxi
                 };
                 System.Windows.Controls.Canvas.SetLeft(ellipse, t.getPosition().getX());
                 System.Windows.Controls.Canvas.SetTop(ellipse, t.getPosition().getY());
-                move.Children.Add(ellipse);
+                map.Children.Add(ellipse);
             }
         }
     }

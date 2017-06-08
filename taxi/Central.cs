@@ -80,7 +80,7 @@ namespace taxi
         }
         public void clearMap(bool complete)
         {
-            map.clear(complete);
+            map.clear();
         }
         public void startSimulation()
         {
@@ -109,7 +109,7 @@ namespace taxi
 
             if (!isRunning() || isRunning() && (System.Windows.MessageBox.Show(messageBoxText, caption, button, icon) == System.Windows.MessageBoxResult.Yes))
             {
-                map.clear(true);
+                map.clear();
                 token.Cancel();
                 running = false;
                 if (window.TaxiStandInput.Text.Length > 0 && window.conurbationCountInput.Text.Length > 0)
