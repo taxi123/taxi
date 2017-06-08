@@ -39,6 +39,7 @@
                 <ImageBrush ImageSource="/resources/map.png"/>
             </Canvas.Background>
         </Canvas>
-        <Canvas x:Name="moveableCanvas" HorizontalAlignment="Left" Height="500" Margin="270,26,0,-368" VerticalAlignment="Top" Width="500"/>
+        <Canvas x:Name="moveableCanvas" HorizontalAlignment="Left" Height="500" Margin="270,26,0,-368" VerticalAlignment="Top" Width="500" />
+
     </Grid>
 </Window>

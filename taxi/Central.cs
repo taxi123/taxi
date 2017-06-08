@@ -27,6 +27,11 @@ namespace taxi
         public Central(MainWindow window)
         {
             this.window = window;
+            this.taxis = new List<Taxi>();
+            this.taxiPoints = new List<TaxiPoint>();
+            this.conurbationPoints = new List<Point>();
+            this.clients = new List<Client>();
+            deniedRequests = 0;
             this.map = map = new Map(window,this); ;
         }
         public bool isRunning()
