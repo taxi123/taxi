@@ -53,11 +53,6 @@ namespace taxi
             return new TaxiPoint(point, 1);
         }
 
-        public void createClients()
-        {
-
-        }
-
         public void addTaxi(Taxi taxi)
         {
             this.taxis.Add(taxi);
@@ -100,6 +95,33 @@ namespace taxi
             {
                 while (!tok.IsCancellationRequested || tick < maxTicks)
                 {
+                    Random rnd = new Random();
+                    if (rnd.Next(0,10) == 0)
+                    {
+                        Point loc;
+                        bool changeLoc = true;
+                        switch (rnd.Next(0, 5))
+                        {
+                            case 0:
+                                loc = conurbationPoints.ElementAt(rnd.Next(0, conurbationPoints.Count));
+                                changeLoc = false;
+                                break;
+                            case 1:
+                                loc = map.getValidPoints().ElementAt(rnd.Next(0, map.getValidPoints().Count));
+                                changeLoc = false;
+                                break;
+                            default:
+                                loc = map.getValidPoints().ElementAt(rnd.Next(0, map.getValidPoints().Count));
+                                break;
+                        }
+                        for (int i = 0; i < rnd.Next(0, 4); i++)
+                        {
+                            Client client = new Client(loc);
+                            clients.Add(client);
+                            if (changeLoc)loc = map.getValidPoints().ElementAt(rnd.Next(0, map.getValidPoints().Count));
+
+                        }
+                    }
                     try
                     {
                         window.Dispatcher.Invoke((Action)(() => {
