@@ -103,7 +103,34 @@ namespace taxi
                 }
                 
             }
-
+            int taxiInt = taxiStandInt * 3;
+            for(int i = 0; i < taxiInt; i++)
+            {
+                var rectangle = new System.Windows.Shapes.Rectangle()
+                {
+                    Width = 10,
+                    Height = 10,
+                    Fill = Brushes.Yellow
+                };
+                Point tmp = null;
+                while (tmp == null || usedPoints.Contains(tmp))
+                {
+                    tmp = points.ElementAt(rndm.Next(0, points.Count));
+                    if (usedPoints.Count == points.Count)
+                    {
+                        break;
+                    }
+                }
+                if (tmp != null)
+                {
+                    //TODO: statische Kapazität erweitern auf Input-Feld
+                    Taxi taxi = new Taxi(new State(10, "Frei"), tmp);
+                    central.addTaxi(taxi);
+                    System.Windows.Controls.Canvas.SetLeft(rectangle, tmp.getX());
+                    System.Windows.Controls.Canvas.SetTop(rectangle, tmp.getY());
+                    map.Children.Add(rectangle);
+                }
+            }
         }
 
         public void createValidPoints()
