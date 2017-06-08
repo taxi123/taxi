@@ -11,7 +11,6 @@ namespace taxi
         private List<Taxi> taxis;
         private Point point;
         private int capacity;
-        private int currentCapacity;
 
         public TaxiPoint(Point point, int capacity)
         {
@@ -19,11 +18,20 @@ namespace taxi
             this.capacity = capacity;
         }
 
+        public int getCapacity()
+        {
+            return capacity;
+        }
+
+        public List<Taxi> getTaxis()
+        {
+            return taxis;
+        }
+
         public void addTaxi(Taxi taxi)
         {
             if (hasCapacity()) {
                 this.taxis.Add(taxi);
-                this.currentCapacity++;
            }
         }
 
@@ -34,12 +42,11 @@ namespace taxi
         public void dropTaxis(Taxi taxi)
         {
             this.taxis.Remove(taxi);
-            this.currentCapacity--;
         }
 
         public Boolean hasCapacity()
         {
-            return currentCapacity < capacity;
+            return taxis.Count < capacity;
         }
     }
 }
