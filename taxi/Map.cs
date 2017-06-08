@@ -108,8 +108,9 @@ namespace taxi
             {
                 var rectangle = new System.Windows.Shapes.Rectangle()
                 {
-                    Width = 10,
-                    Height = 10,
+                    Width = 20,
+                    Height = 20,
+                    Stroke = Brushes.Black,
                     Fill = Brushes.Yellow
                 };
                 Point tmp = null;
