@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +25,11 @@ namespace taxi
         public int getY()
         {
             return this.y;
+        }
+
+        public double getDistance(Point a)
+        {
+            return Math.Sqrt(Math.Pow((x - a.x), 2) + Math.Pow((y - a.y), 2));
         }
 
         static void drawPoints()
