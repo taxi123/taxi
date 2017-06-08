@@ -16,8 +16,8 @@ namespace taxi
     {
         private List<Point> crossings;
         private List<Point> points;
-        private double xachsis = 495;
-        private double yachsis = 495;
+        private double xachsis = 500;
+        private double yachsis = 500;
 
         Random rndm;
 
@@ -65,8 +65,8 @@ namespace taxi
                     //TODO: statische Kapazität erweitern auf Input-Feld
                     TaxiPoint tp = new TaxiPoint(tmp,3);
                     central.addTaxiPoint(tp);
-                    System.Windows.Controls.Canvas.SetLeft(rectangle, tmp.getX());
-                    System.Windows.Controls.Canvas.SetTop(rectangle, tmp.getY());
+                    System.Windows.Controls.Canvas.SetLeft(rectangle, (tmp.getX() - rectangle.Width/2));
+                    System.Windows.Controls.Canvas.SetTop(rectangle, (tmp.getY() - rectangle.Height/2));
                     map.Children.Add(rectangle);
                 }
             }
@@ -97,8 +97,8 @@ namespace taxi
                 if (tmp != null)
                 {
                     central.addConnurbationPoint(tmp);
-                    System.Windows.Controls.Canvas.SetLeft(ellipse, tmp.getX());
-                    System.Windows.Controls.Canvas.SetTop(ellipse, tmp.getY());
+                    System.Windows.Controls.Canvas.SetLeft(ellipse, (tmp.getX() - ellipse.Width/2));
+                    System.Windows.Controls.Canvas.SetTop(ellipse, (tmp.getY() - ellipse.Height/2));
                     map.Children.Add(ellipse);
                 }
                 
@@ -115,8 +115,8 @@ namespace taxi
                     };
                     Taxi taxi = new Taxi(new State(10, "Frei"), tp.getPosition());
                     central.addTaxi(taxi);
-                    System.Windows.Controls.Canvas.SetLeft(rectangle, tp.getPosition().getX());
-                    System.Windows.Controls.Canvas.SetTop(rectangle, tp.getPosition().getY());
+                    System.Windows.Controls.Canvas.SetLeft(rectangle, (tp.getPosition().getX()) - rectangle.Width/2);
+                    System.Windows.Controls.Canvas.SetTop(rectangle, (tp.getPosition().getY()) - rectangle.Height/2);
                     map.Children.Add(rectangle);
                 }
             }
@@ -129,22 +129,20 @@ namespace taxi
 
             for (int i = 0; i <= this.xachsis; i = i + intervall)
             {
-                if (i == 100) i = 95;
                 for (int j = 0; j <= this.yachsis; j++)
                 {
-                    this.points.Add(new taxi.Point(i, j));
-                }
+                    this.points.Add(new Point(i, j));
+            }
             }
 
             for (int i = 0; i <= this.yachsis; i = i + intervall)
             {
-                if (i == 100) i = 95;
                 for (int j = 0; j <= this.xachsis; j++)
                 {
                     Point check = this.points.Find(x => x.getX() == j && x.getY() == i);
                     if (check == null)
                     {
-                        this.points.Add(new taxi.Point(j, i));
+                        this.points.Add(new Point(j, i));
                     }
                     
                 }
@@ -174,8 +172,8 @@ namespace taxi
                     Stroke = Brushes.Black,
                     Fill = Brushes.Aqua
                 };
-                System.Windows.Controls.Canvas.SetLeft(rectangle, tp.getPosition().getX());
-                System.Windows.Controls.Canvas.SetTop(rectangle, tp.getPosition().getY());
+                System.Windows.Controls.Canvas.SetLeft(rectangle, (tp.getPosition().getX() - rectangle.Width/2));
+                System.Windows.Controls.Canvas.SetTop(rectangle, (tp.getPosition().getY() - rectangle.Height/2));
                 map.Children.Add(rectangle);
             }
 
@@ -189,8 +187,8 @@ namespace taxi
                     Stroke = Brushes.Black,
                     Fill = Brushes.OrangeRed
                 };
-                System.Windows.Controls.Canvas.SetLeft(ellipse, p.getX());
-                System.Windows.Controls.Canvas.SetTop(ellipse, p.getY());
+                System.Windows.Controls.Canvas.SetLeft(ellipse, (p.getX() - ellipse.Width/2));
+                System.Windows.Controls.Canvas.SetTop(ellipse, (p.getY() - ellipse.Height/2));
                 map.Children.Add(ellipse);
             }
 
@@ -204,8 +202,8 @@ namespace taxi
                     Stroke = Brushes.White,
                     Fill = Brushes.LawnGreen
                 };
-                System.Windows.Controls.Canvas.SetLeft(ellipse, c.getPosition().getX());
-                System.Windows.Controls.Canvas.SetTop(ellipse, c.getPosition().getY());
+                System.Windows.Controls.Canvas.SetLeft(ellipse, (c.getPosition().getX() - ellipse.Width/2));
+                System.Windows.Controls.Canvas.SetTop(ellipse, (c.getPosition().getY() - ellipse.Height/2));
                 map.Children.Add(ellipse);
             }
 
@@ -219,8 +217,8 @@ namespace taxi
                     Stroke = Brushes.Gray,
                     Fill = Brushes.Beige
                 };
-                System.Windows.Controls.Canvas.SetLeft(ellipse, t.getPosition().getX());
-                System.Windows.Controls.Canvas.SetTop(ellipse, t.getPosition().getY());
+                System.Windows.Controls.Canvas.SetLeft(ellipse, (t.getPosition().getX() - ellipse.Width/2));
+                System.Windows.Controls.Canvas.SetTop(ellipse, (t.getPosition().getY() - ellipse.Height/2));
                 map.Children.Add(ellipse);
             }
         }
